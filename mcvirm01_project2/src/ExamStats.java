@@ -25,31 +25,32 @@ public class ExamStats{
 	static final double minC = 70;
 	static final double minD = 60;
 
+	//variables that hold the minimum and maximum score
+	static double minimumScore;
+	static double maximumScore;
+
+	//hold total of all valid scores
+	static double totalCount;
+	
+	//holds the average for all valid scores
+	static double averageScore;
+
+	//variables that hold the occurences of each letter grade
+	static int ACount;
+	static int BCount;
+	static int CCount;
+	static int DCount;
+	static int FCount;
+
+	//variables for holding the percentage of certain grade letters
+	static double APercentage;
+	static double BPercentage;
+	static double CPercentage;
+	static double DPercentage;
+	static double FPercentage;
+
 	public static void main(String[] args){
 		
-		//variables that hold the minimum and maximum score
-		double minimumScore;
-		double maximumScore;
-
-		//hold total of all valid scores
-		double totalCount;
-		
-		//holds the average for all valid scores
-		double averageScore;
-
-		//variables that hold the occurences of each letter grade
-		double ACount;
-		double BCount;
-		double CCount;
-		double DCount;
-		double FCount;
-
-		//variables for holding the percentage of certain grade letters
-		double APercentage;
-		double BPercentage;
-		double CPercentage;
-		double DPercentage;
-		double FPercentage;
 
 		//string variable for holding the file name the user provides, assuming they add the appropriate file extension
 		String filename;
@@ -162,6 +163,7 @@ public class ExamStats{
 
 						
 					}
+					
 				}
 
 
@@ -181,6 +183,7 @@ public class ExamStats{
 					
 				}
 
+
 				averageScore = sumOfScores / totalCount;
 					
 				//Calculate the percentage of each score, remember to print these out 
@@ -192,35 +195,57 @@ public class ExamStats{
 				CPercentage = (CCount / totalCount) * 100;
 				DPercentage = (DCount / totalCount) * 100;
 				FPercentage = (FCount / totalCount) * 100;
+
 				
-				//output
-
-				System.out.println("Exam stats\n");	
-				System.out.printf("Number of Scores: %f\n", totalCount);
-				System.out.printf("Average Score : %.2f\n", averageScore);
-				//test out the percentages and make sure they are correct
-				System.out.printf("A count: %f   %.2f%%\n",ACount,APercentage);
-				System.out.printf("B count: %f   %.2f%%\n",BCount,BPercentage);
-				System.out.printf("C count: %f   %.2f%%\n",CCount,CPercentage);
-				System.out.printf("D count: %f   %.2f%%\n",DCount,DPercentage);
-				System.out.printf("F count: %f   %.2f%%\n",FCount,FPercentage);
-				//print out min and max
-
-				System.out.printf("Minimum Score : %.2f\nMaximum Score: %.2f\n",minimumScore,maximumScore); 
 			}
 
-			//exit the application
 
-			System.exit(0);	
+			//Calculate the standard deviation
 
-		} catch(Exception ex){
+			double stdSum = 0;
 
-			System.err.println("Enter valid filename");
+			for( double scoreListValue : scoreList ){ 
 
-			System.exit(0);
+				stdSum += Math.pow((averageScore - scoreListValue), 2);
 
-		}
+			}
+
+			double std = Math.sqrt((stdSum / totalCount)); 
+			//use print stream to tell the JVM to pipe all output into a file named "output.txt"
 			
+			PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+
+			System.setOut(out);
+
+			System.out.println("Exam stats\n");	
+			
+			//cast the totalCount into an int to prevent tracing x.0000000
+
+			System.out.printf("Number of Scores: %d\n", (int)totalCount);
+			System.out.printf("Average Score : %.2f\n", averageScore);
+			System.out.printf("Standard deviation: %.2f\n", std);
+			//test out the percentages and make sure they are correct
+
+			System.out.printf("A count: %d   %.2f%%\n",ACount,APercentage);
+			System.out.printf("B count: %d   %.2f%%\n",BCount,BPercentage);
+			System.out.printf("C count: %d   %.2f%%\n",CCount,CPercentage);
+			System.out.printf("D count: %d   %.2f%%\n",DCount,DPercentage);
+			System.out.printf("F count: %d   %.2f%%\n",FCount,FPercentage);
+
+			//print out min and max
+
+			System.out.printf("Minimum Score : %.2f\nMaximum Score: %.2f\n",minimumScore,maximumScore); 
+
+			}catch(Exception ex){
+
+				System.err.println("Enter valid filename");
+
+			}
+
+			
+			
+	
+	
 
 	}
 
