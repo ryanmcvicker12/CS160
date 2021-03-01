@@ -212,29 +212,51 @@ public class ExamStats{
 
 			double std = Math.sqrt((stdSum / totalCount)); 
 			//use print stream to tell the JVM to pipe all output into a file named "output.txt"
-			
-			PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
 
-			System.setOut(out);
-
-			System.out.println("Exam stats\n");	
+			// print out this section to first display to the console 
+			System.out.println("\nExam stats\n");	
 			
 			//cast the totalCount into an int to prevent tracing x.0000000
 
 			System.out.printf("Number of Scores: %d\n", (int)totalCount);
 			System.out.printf("Average Score : %.2f\n", averageScore);
-			System.out.printf("Standard deviation: %.2f\n", std);
+			System.out.printf("Standard deviation: %.2f\n\n", std);
 			//test out the percentages and make sure they are correct
 
 			System.out.printf("A count: %d   %.2f%%\n",ACount,APercentage);
 			System.out.printf("B count: %d   %.2f%%\n",BCount,BPercentage);
 			System.out.printf("C count: %d   %.2f%%\n",CCount,CPercentage);
 			System.out.printf("D count: %d   %.2f%%\n",DCount,DPercentage);
-			System.out.printf("F count: %d   %.2f%%\n",FCount,FPercentage);
+			System.out.printf("F count: %d   %.2f%%\n\n",FCount,FPercentage);
 
 			//print out min and max
 
-			System.out.printf("Minimum Score : %.2f\nMaximum Score: %.2f\n",minimumScore,maximumScore); 
+			System.out.printf("Minimum Score : %d\nMaximum Score: %d\n\n",(int)minimumScore,(int)maximumScore); 
+			
+			//change the ouput stream to dump all text into a file instead
+			
+			PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+
+			System.setOut(out);
+
+			System.out.println("\nExam stats\n");	
+			
+			//cast the totalCount into an int to prevent tracing x.0000000
+
+			System.out.printf("Number of Scores: %d\n", (int)totalCount);
+			System.out.printf("Average Score : %.2f\n", averageScore);
+			System.out.printf("Standard deviation: %.2f\n\n", std);
+			//test out the percentages and make sure they are correct
+
+			System.out.printf("A count: %d   %.2f%%\n",ACount,APercentage);
+			System.out.printf("B count: %d   %.2f%%\n",BCount,BPercentage);
+			System.out.printf("C count: %d   %.2f%%\n",CCount,CPercentage);
+			System.out.printf("D count: %d   %.2f%%\n",DCount,DPercentage);
+			System.out.printf("F count: %d   %.2f%%\n\n",FCount,FPercentage);
+
+			//print out min and max
+
+			System.out.printf("Minimum Score : %d\nMaximum Score: %d\n\n",(int)minimumScore,(int)maximumScore); 
 
 			}catch(Exception ex){
 
