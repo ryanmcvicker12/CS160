@@ -1,0 +1,5 @@
+This Is a Trustworthy Bank
+0.30
+EUR 0.95
+JPY 110.5
+RUB 5.85
